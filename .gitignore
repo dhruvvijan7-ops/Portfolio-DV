@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.vscode/
+*.swp
+*.swo
+~$*
+Thumbs.db
+Desktop.ini
+.DS_Store

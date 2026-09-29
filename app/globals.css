@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DHRUV — AI × CYBERSECURITY × SOFTWARE
+   Design tokens
+   ============================================================ */
+
+@theme {
+  --color-ink: #171914;
+  --color-deep: #1d2019;
+  --color-deep-moss: #20251c;
+  --color-moss: #38402f;
+  --color-olive: #6f7c5c;
+  --color-paper: #e8e6da;
+  --color-stone: #a7a89c;
+  --color-hairline: #45483d;
+
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+:root {
+  --focus: var(--color-olive);
+  --selection-bg: var(--color-paper);
+  --selection-fg: var(--color-ink);
+  --bg: var(--color-ink);
+  --fg: var(--color-paper);
+  --muted: var(--color-stone);
+  --rule: var(--color-hairline);
+  --accent: var(--color-olive);
+}
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+}
+
+/* Theme contexts */
+.theme-paper {
+  --focus: var(--color-ink);
+  --selection-bg: var(--color-ink);
+  --selection-fg: var(--color-paper);
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --muted: #5e5f55;
+  --rule: #c9c7b8;
+  --accent: #4a573d;
+}
+
+.theme-moss {
+  --focus: var(--color-paper);
+  --selection-bg: var(--color-paper);
+  --selection-fg: var(--color-ink);
+  --bg: var(--color-deep-moss);
+  --fg: var(--color-paper);
+  --muted: var(--color-stone);
+  --rule: #2f3527;
+  --accent: #9aa97f;
+}
+
+.theme-paper,
+.theme-moss {
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ============================================================
+   Typography scale — fluid, editorial
+   ============================================================ */
+
+.text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.text-micro {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.text-body {
+  font-size: clamp(1rem, 1.1vw + 0.6rem, 1.2rem);
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.text-display {
+  font-size: clamp(1.9rem, 9vw, 5.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  overflow-wrap: break-word;
+}
+
+.text-display-xl {
+  font-size: clamp(2.2rem, 8.5vw, 7rem);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  font-weight: 800;
+  overflow-wrap: break-word;
+}
+
+.text-hero {
+  font-size: clamp(2.6rem, 11vw, 10.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   Editorial rules & helpers
+   ============================================================ */
+
+.hairline-b {
+  border-bottom: 1px solid var(--rule);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--rule);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--rule);
+}
+
+.link-fade {
+  transition: color 0.25s ease;
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.underline-draw {
+  position: relative;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover,
+  &.is-active {
+    background-size: 100% 1px;
+  }
+}
+
+/* ============================================================
+   Marquee
+   ============================================================ */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ============================================================
+   Grain
+   ============================================================ */
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 8s steps(10) infinite;
+}
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  10% { transform: translate3d(-4%, -3%, 0); }
+  30% { transform: translate3d(3%, -6%, 0); }
+  50% { transform: translate3d(-5%, 4%, 0); }
+  70% { transform: translate3d(4%, 5%, 0); }
+  90% { transform: translate3d(-3%, 2%, 0); }
+}
+
+/* ============================================================
+   Custom cursor
+   ============================================================ */
+
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Scrollbar — quiet */
+@media (pointer: fine) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-hairline) transparent;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
